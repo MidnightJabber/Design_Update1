@@ -2,15 +2,250 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+body{
+	background: white;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+}
 
-<!-- Linking the CSS file -->
-<link rel="stylesheet" href="./css/style.css" type="text/css" />
+ul {
+  text-align: left;
+  display: inline;
+  margin: 0;
+  padding: 15px 4px 17px 0;
+  list-style: none;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+ul li {
+  font: bold 12px/18px sans-serif;
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 15px 20px;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+ul li:hover {
+  background: #555;
+  color: #fff;
+}
+ul li ul {
+  padding: 0;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 150px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s;
+}
+ul li ul li { 
+  background: #555; 
+  display: block; 
+  color: #fff;
+  text-shadow: 0 -1px 0 #000;
+}
+ul li ul li:hover { background: #666; }
+ul li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
 
-<script type="text/javascript" src="./js/scrollFunc.js" ></script>
+/*Class Grow*/
+.grow {
+display: inline-block;
+-webkit-transition-duration: 0.5s;
+transition-duration: 0.5s;
+-webkit-transition-property: transform;
+transition-property: transform;
+-webkit-transform: translateZ(0);
+transform: translateZ(0);
+box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
 
+/*Grow Hover Code*/
+.grow:hover, .grow:focus, .grow:active {
+-webkit-transform: scale(1.1);
+transform: scale(1.1);
+}
+
+/*Class Glow*/
+.glow {
+display: inline-block;
+-webkit-transition-duration: 0.5s;
+transition-duration: 0.5s;
+-webkit-transition-property: box-shadow;
+transition-property: box-shadow;
+-webkit-transform: translateZ(0);
+transform: translateZ(0);
+}
+
+/*Glow Hover Code*/
+.glow:hover, .glow:focus, .glow:active {
+ box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+body{ margin: 0px; text-align: center; }
+#pagetop{
+	position: fixed;
+	top: 0px;
+	width:100%;
+	height: 120px;
+	background: #06C;
+        position; absolute;
+        z-index: 100;
+	font-size: 23px;
+	padding-top: 50px;
+	transition: height 0.3s linear 0s, padding 0.3s linear 0s;
+	overflow:hidden;
+}
+#pagetop > #menu{
+	position: absolute;
+	bottom: 0px;
+	width:100%;
+	background: #004A95;
+	height: 50px;
+	transition: height 0.3s linear 0s;
+}
+
+#cpBtn{
+	display: block;
+	position: fixed;
+	right: 20px;
+	width: 20px;
+	height: 24px;
+	background: linear-gradient(#FFF,#DDD);
+	border: #AAA 1px solid;
+	border-radius: 2px;
+	padding: 2px 5px;
+	cursor: pointer;
+	transition: border 0.3s linear 0s;
+}
+#cpBtn:hover{
+	border: #06F 1px solid;
+}
+#cpBtn:hover div{
+	background: #06F;
+}
+#cpBtn > div{
+	width: 20px;
+	height: 4px;
+	background: #333;
+	margin: 3px 0px;
+	border-radius: 4px;
+	transition: background 0.3s linear 0s;
+}
+#cp{
+	position: fixed;
+	z-index: 100;
+	right: -260px;
+	top: 100px;
+	width: 350px;
+	height: 0px;
+	background: #333;
+	transition: right 0.3s linear 0s;
+}
+
+#crossBtn{
+	display: block;
+	position: fixed;
+	right: 20px;
+	width: 20px;
+	height: 24px;
+	background: linear-gradient(#FFF,#DDD);
+	border: #AAA 1px solid;
+	border-radius: 2px;
+	padding: 2px 5px;
+	cursor: pointer;
+	transition: border 0.3s linear 0s;
+}
+#crossBtn:hover{
+	border: #06F 1px solid;
+}
+
+
+#wrapper{ margin-top: 230px; }
+</style>
+
+<script>
+var pagetop, menu, yPos;
+var opacitytoggler = true;
+function yScroll(){
+	pagetop = document.getElementById('pagetop');
+	menu = document.getElementById('menu');
+	yPos = window.pageYOffset;
+	if(yPos > 150){
+		pagetop.style.height = "36px";
+		pagetop.style.paddingTop = "8px";
+		menu.style.height = "0px";
+	} else {
+		pagetop.style.height = "120px";
+		pagetop.style.paddingTop = "50px";
+		menu.style.height = "50px";
+	}
+}
+window.addEventListener("scroll", yScroll);
+
+function toggleCP(){
+
+	wrap = document.getElementById('wrap');
+	pagetop = document.getElementById('pagetop');
+	cpBtn = document.getElementById('cpBtn');
+	
+	if(opacitytoggler){
+		document.body.style.backgroundColor = "black";
+		wrap.style.opacity = "0.2";
+		pagetop.style.opacity = "0.2";
+		cpBtn.style.visibility= "hidden";
+		opacitytoggler = !opacitytoggler;
+	}
+	else{
+		document.body.style.backgroundColor = "white";
+		cpBtn.style.visibility = "visible";
+		wrap.style.opacity = "1";
+		pagetop.style.opacity = "1";
+		pagetop.style.opacity = "1";
+		opacitytoggler = !opacitytoggler;
+	}
+	var cp = document.getElementById("cp");
+	cp.style.height = window.innerHeight - 60+"px";
+	if(cp.style.right == "0px"){
+		cp.style.right = "-350px";
+	} else {
+		cp.style.right = "0px";
+	}
+}
+
+</script>
 </head>
 <body>
+
 <div id="pagetop">
+	<div id="cpBtn" onclick="toggleCP()">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
   <img src="http://midnightjabber.com/wp-content/uploads/csp/logo_img/NoVbMbosU0-pq2rJjiEFj-dtU4RxT7nq-Z2FJ4gKgyu.png" style="margin-top:-50px">
   <div id="menu">
   <ul><li>Home</li>
@@ -29,7 +264,9 @@
 </div>
 </div>
 <div id="wrapper">
-
+<div id="cp">
+	<div id="crossBtn" onClick="toggleCP()"></div>
+</div>
 <div id="wrap">
 <!--Image Area-->
 <a href="http://midnightjabber.com/movies/Lucy-2014/"><img class = "grow glow" src="http://midnightjabber.com/wp-content/uploads/2014/08/Lucy-Poster.jpg" width=215px height=auto title="" style="margin-left: 5px;" ></a>
