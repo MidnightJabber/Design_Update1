@@ -167,19 +167,24 @@ body{ margin: 0px; text-align: center; }
 }
 
 #crossBtn{
+	top: 110px;
 	display: block;
+	font-size: 25px;
 	position: fixed;
-	right: 20px;
+	right: -300px;
+	text-align: center;
 	width: 20px;
 	height: 24px;
+	color: black;
 	background: linear-gradient(#FFF,#DDD);
 	border: #AAA 1px solid;
 	border-radius: 2px;
 	padding: 2px 5px;
 	cursor: pointer;
-	transition: border 0.3s linear 0s;
+	transition: right 0.3s linear 0s;
 }
 #crossBtn:hover{
+	color: #06F;
 	border: #06F 1px solid;
 }
 
@@ -211,6 +216,7 @@ function toggleCP(){
 	wrap = document.getElementById('wrap');
 	pagetop = document.getElementById('pagetop');
 	cpBtn = document.getElementById('cpBtn');
+	crossBtn = document.getElementById('crossBtn');
 	
 	if(opacitytoggler){
 		document.body.style.backgroundColor = "black";
@@ -231,8 +237,10 @@ function toggleCP(){
 	cp.style.height = window.innerHeight - 60+"px";
 	if(cp.style.right == "0px"){
 		cp.style.right = "-350px";
+		crossBtn.style.right = "-300px";
 	} else {
 		cp.style.right = "0px";
+		crossBtn.style.right = "20px";
 	}
 }
 
@@ -265,7 +273,7 @@ function toggleCP(){
 </div>
 <div id="wrapper">
 <div id="cp">
-	<div id="crossBtn" onClick="toggleCP()"></div>
+	<div id="crossBtn" onClick="toggleCP()"> &#10006 </div>
 </div>
 <div id="wrap">
 <!--Image Area-->
