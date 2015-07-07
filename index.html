@@ -190,6 +190,20 @@ body{ margin: 0px; text-align: center; }
 
 
 #wrapper{ margin-top: 230px; }
+
+div#load_screen{
+	background: #FFF;
+	opacity: 1;
+	position: fixed;
+    z-index:10;
+	top: 0px;
+	width: 100%;
+	height: 1600px;
+}
+div#load_screen > div#loading{
+	left: 40%;
+	margin-top: 300px;
+}
 </style>
 
 <script>
@@ -245,6 +259,14 @@ function toggleCP(){
 }
 
 </script>
+
+<script>
+window.addEventListener("load", function(){
+	var load_screen = document.getElementById("load_screen");
+	document.body.removeChild(load_screen);
+});
+</script>
+
 </head>
 <body>
 
@@ -272,6 +294,7 @@ function toggleCP(){
 </ul>
 </div>
 </div>
+<div id="load_screen"><div id="loading"><img src="http://i1197.photobucket.com/albums/aa426/Jastner/loading.gif" style="height: 70px width: auto;"><br><img src="http://i1197.photobucket.com/albums/aa426/Jastner/loading_gif_by_kimhyunailuv-d6i89u6.gif" style="height: 1500px width: auto;"></div></div>
 <div id="wrapper">
 <div id="cp">
 	<div id="crossBtn" onClick="toggleCP()"> &#10006 </div>
